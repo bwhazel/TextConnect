@@ -37,5 +37,5 @@ return array(
 
 	'docs' => array('handles' => 'docs'),
 	'bootstrapper' => array('auto' => true),
-
+	'jqueryfileupload' => array('auto' => true),
 );

@@ -1,30 +1,6 @@
 @layout('layouts.master')
 
-@section('content')
-    <div class='page-header'>
-      <h1>Books <small>Add</small></h1>
-    </div>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header"><i class="icon-book"></i>Books</li>
-              <li><a href="/books"><i class="icon-home"></i>Home</a></li>
-              <li class="active" ><a href="{{ URL::to('books/new') }}"><i class="icon-plus"></i>Post A Book</a></li>
-              <li><a href="#"><i class="icon-search"></i>Search Books</a></li>
-              <li><a href="{{ URL::to('books/your_books') }}"><i class="icon-user"></i>My Books</a></li>
-              <li class="nav-header">Profile</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9" id="new_book">    
+@section('content')   
           <blockquote>
             <p class="lead">Add a book</p>
           </blockquote>
@@ -86,7 +62,4 @@
             </div>
             {{ Form::actions(Button::primary_submit('Submit Book')) }}
           {{ Form::close() }}
-        </div>
-      </div>
-    </div>
 @endsection

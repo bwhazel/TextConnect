@@ -202,7 +202,7 @@ return array(
 		'Carousel'       => 'Bootstrapper\\Carousel',
 		'DropdownButton' => 'Bootstrapper\\DropdownButton',
 		'Form'           => 'Bootstrapper\\Form',
-		'Helpers'        => 'Bootstrapper\\Helpers',
+		//'Helpers'        => 'Bootstrapper\\Helpers',
 		'Icon'           => 'Bootstrapper\\Icon',
 		'Image'          => 'Bootstrapper\\Image',
 		'Label'          => 'Bootstrapper\\Label',

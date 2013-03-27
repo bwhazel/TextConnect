@@ -1,3 +1,26 @@
+
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../font/bebas-neue/BebasNeue-webfont.eot');
+    src: url('../font/bebas-neue/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/bebas-neue/BebasNeue-webfont.woff') format('woff'),
+         url('../font/bebas-neue/BebasNeue-webfont.ttf') format('truetype'),
+         url('../font/bebas-neue/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+	background: url('../img/fabric_of_squares_gray.png');
+}
+
+.brand {
+	font-family:"BebasNeueRegular", sans-serif !important;
+	font-size: 30px !important;
+	color: white!important;
+}
+
 .x-icon {
 	color: red;
 	text-align: center;
@@ -8,7 +31,17 @@
 	text-align: center;
 }
 
-.container{
-
-	
+.delete-form{
+	padding: 0px;
+	margin: 0px !important;
 }
+
+.well{
+	background-color: white;
+}
+
+blockquote{
+	border-left: 5px solid #67C6BF!important;
+}
+
+

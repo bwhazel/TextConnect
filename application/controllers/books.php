@@ -6,7 +6,7 @@ class Books_Controller extends Base_Controller {
 
 	public function __construct()
 	{
-		$this->filter('before','auth')->only(array('create', 'your_books', 'edit', 'update'));
+		$this->filter('before','auth')->only(array('create', 'library', 'edit', 'update'));
 	}
 
 	public function get_index()
@@ -52,9 +52,9 @@ class Books_Controller extends Base_Controller {
 		return View::make('books.show')
 			->with('book', Book::find($id));
 	}
-	public function get_your_books()
+	public function get_library()
 	{
-		return View::make('books.your_books')
+		return View::make('books.library')
 			->with('fname', Auth::user()->fname)
 			->with('lname', Auth::user()->lname)
 			->with('email', Auth::user()->email)
@@ -65,7 +65,7 @@ class Books_Controller extends Base_Controller {
 	{
 		if (!$this->book_belongs_to_user($id))
 		{
-			return Redirect::to_route('your_books')->with('message', '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>Invalid Book</div>');
+			return Redirect::to_route('library')->with('message', '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>Invalid Book</div>');
 		}
 
 		return View::make('books.edit')
@@ -83,6 +83,7 @@ class Books_Controller extends Base_Controller {
 		}
 
 		$validation = Book::validate(Input::all());
+
 		if (Input::get('trade')){$checked = 1;}else{$checked = 0;}
 
 		if($validation->passes())
@@ -106,6 +107,15 @@ class Books_Controller extends Base_Controller {
 		}
 	}
 
+	public function delete_destroy($id = NULL)
+	{
+		$id = Input::get('book_id');
+		$book = Book::find($id);
+		$book->delete();
+		return Redirect::to_route('library')
+			->with('message', '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">x</button>Book <i> ' . $book->title . '</i> has been deleted</div>' );
+	}
+
 	private function book_belongs_to_user($id)
 	{
 		$book = Book::find($id);
@@ -116,7 +126,6 @@ class Books_Controller extends Base_Controller {
 		}
 
 		return false;
-
 	}
 
 }

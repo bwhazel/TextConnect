@@ -1,12 +1,10 @@
 <?php
 
-// Home Resource
-////////////////	
+// Home Resource	
 Route::get('/', array('before' => 'auth', 'as' => 'home', 'uses' => 'home@index'));
 
 
 // User Resource
-////////////////
 Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
 //Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
 Route::get('register', array('as' => 'register', 'uses' => 'users@new'));
@@ -20,18 +18,60 @@ Route::post('login', array('uses' => 'users@login'));
 
 
 // Book Resource
-////////////////
 Route::get('books', array('as' => 'books', 'uses' => 'books@index'));
 Route::get('books/(:num)', array('as' => 'book', 'uses' => 'books@show'));
-Route::get('books/your_books', array('as'=> 'your_books' , 'uses' => 'books@your_books'));
+Route::get('books/library', array('as'=> 'library' , 'uses' => 'books@library'));
 Route::get('books/new', array('as' => 'new_book', 'uses' => 'books@new'));
 Route::get('books/(:any)/edit', array('as' => 'edit_book', 'uses' => 'books@edit'));
 Route::post('books', array('before' => 'csrf', 'uses' => 'books@create'));
 Route::put('books/(:any)', array('before' => 'csrf', 'uses' => 'books@update'));
-Route::delete('books/(:any)', 'books@destroy');
+Route::delete('books/library', array('as' => 'destroy_book', 'uses' => 'books@destroy'));
 
+// Class Resource
+Route::get('classes', array('as' => 'classes', 'uses' => 'classes@index'));
+Route::get('classes/(:any)', array('as' => 'class', 'uses' => 'classes@show'));
+Route::get('classes/new', array('as' => 'new_class', 'uses' => 'classes@new'));
+Route::get('classes/term', array('as' => 'term', 'uses' => 'classes@term'));
+Route::get('classes/(:any)/edit', array('as' => 'edit_class', 'uses' => 'classes@edit'));
+Route::post('classes', 'classes@create');
+Route::put('classes/(:any)', 'classes@update');
+Route::delete('classes/(:any)', 'classes@destroy');
 
+//File Uploader
+Route::any('upload', function()
+{
+	$upload_handler = IoC::resolve('uploadhandler');
 
+	header('Pragma: no-cache');
+	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Content-Disposition: inline; filename="files.json"');
+	header('X-Content-Type-Options: nosniff');
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE');
+	header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
+
+	switch ($_SERVER['REQUEST_METHOD']) 
+	{
+	    case 'OPTIONS':
+	        break;
+	    case 'HEAD':
+	    case 'GET':
+	        $upload_handler->get();
+	        break;
+	    case 'POST':
+	        if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
+	            $upload_handler->delete();
+	        } else {
+	            $upload_handler->post();
+	        }
+	        break;
+	    case 'DELETE':
+	        $upload_handler->delete();
+	        break;
+	    default:
+	        header('HTTP/1.1 405 Method Not Allowed');
+	}
+});
 
 /*
 Route::get('register', array('as' => 'register', 'uses' => 'users@new'));

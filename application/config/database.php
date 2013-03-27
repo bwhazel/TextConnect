@@ -71,7 +71,7 @@ return array(
 			'driver'   => 'mysql',
 			'host'     => 'localhost',
 			'unix_socket'   => '/Applications/MAMP/tmp/mysql/mysql.sock',
-			'database' => 'rwu_alumni',
+			'database' => 'TextConnect',
 			'username' => 'root',
 			'password' => 'root',
 			'charset'  => 'utf8',

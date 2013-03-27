@@ -35,6 +35,7 @@ class Users_Controller extends Base_Controller {
 
 	public function get_login()
 	{
+
 		return View::make('users.login');
 	}
 
