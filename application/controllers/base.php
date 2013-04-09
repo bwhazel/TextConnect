@@ -1,5 +1,13 @@
 <?php
 
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : base.php
+Author : Bobby Hazel
+Description : Base controller 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
 class Base_Controller extends Controller {
 
 	/**

@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>TextConnect</title>
-	<meta name="viewport" content="width=device-width">
-	{{ Asset::container('bootstrapper')->styles();}}  
-	{{ HTML::style('css/font-awesome.min.css') }}
-	{{ HTML::style('css/style.css') }}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>TextConnect</title>
+  <meta name="viewport" content="width=device-width">
+  {{ Asset::container('bootstrapper')->styles();}}  
+  {{ HTML::style('css/font-awesome.min.css') }}
+  {{ HTML::style('css/style.css') }}
 </head>
 <!-- Navbar -->
   <div class="navbar navbar-inverse navbar-fixed-top">
@@ -54,33 +54,12 @@
     </div>
   </div>
 <body>
-	<div class="container">
+  <div class="container">
   @if(Session::has('message'))
     {{ Session::get('message') }}         
   @endif
-    <div class="row-fluid">
-      <div class="span2">
-        <div class="sidebar-nav">
-          <div class="well" style="width: 180px; padding: 15px 0;">
-            <ul class="nav nav-list">
-              <li class="{{ URI::is('/') ? 'active' : '' }}"><a href="/"><i class="icon-home"></i>Home</a></li>
-              <li class="nav-header"><i class="icon-book"></i>Books</li>
-              <li class="{{ URI::is('books') ? 'active' : '' }}"><a href="/books"><i class="icon-home"></i>Recommended</a></li>
-              <li class="{{ URI::is('books/new') ? 'active' : '' }}"><a href="#bookModal" data-toggle="modal"><i class="icon-plus"></i>Post A Book</a></li>
-              <li class=""><a href="#"><i class="icon-search"></i>Search Books</a></li>
-              <li class="{{ URI::is('books/library') ? 'active' : '' }}"><a href="{{ URL::to('books/library') }}"><i class="icon-book"></i>My Library</a></li>
-              <li class="nav-header">Profile</li>
-              <li class="{{ URI::is('classes*') ? 'active' : '' }}"><a href="/classes"><i class="icon-list-alt"></i>Class Schedule</a></li>
-              <li class="nav-header"><i class="icon-envelope"></i>Messages</li>
-            </ul>
-          </div><!--/.well -->
-        </div>
-      </div><!--/span-->
-      <div class="span9">
-		    @yield('content')
-      </div>
-    </div>
-	</div>
+        @yield('content')
+  
   <div id="bookModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -104,8 +83,11 @@
         {{ Button::primary_submit('Let us find information') }} <b>&nbspor&nbsp</b> {{ Button::warning_link('/books/new', 'Add Information Yourself'); }}
       {{ Form::close() }}
     </div>
-</div>	
+</div>  
 </body>
 {{ Asset::container('bootstrapper')->scripts();}}
+{{ HTML::script('js/jquery.wookmark.min.js')}}
+{{ HTML::script('js/jquery.imagesloaded.js') }}
 {{ HTML::script('js/main.js') }}
+{{ HTML::script('js/open.js') }}
 </html>

@@ -1,5 +1,14 @@
 <?php
 
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : user.php
+Author : Bobby Hazel
+Description : User model
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
+
 class User extends Basemodel {
 	public static $rules = array(
 		'email' => 'required|email|unique:users',

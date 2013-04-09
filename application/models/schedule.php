@@ -1,5 +1,13 @@
 <?php
 
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : schedule.php
+Author : Bobby Hazel
+Description : Schedule model
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
 class Schedule extends Basemodel {
 
 	public static $table = 'classes';

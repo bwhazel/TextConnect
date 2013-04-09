@@ -1,10 +1,16 @@
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : validation.js
+Author : Bobby Hazel
+Description : used for client side validation on form elements
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
 $(function(){
 
-/*
-*
-* Validation Library
-*
-*/
+    /*
+    * Validation Library
+    */
 
     $('.text_required').change(function(){
         var value = $(this).val();
@@ -22,11 +28,10 @@ $(function(){
     });
 });
 
+
 /*
-* 
 * Function: validateInput();
 * Recieves: The input object, a regular expression, and the value of the input object
-*
 */
 
 function validateInput(input,regEx,value){

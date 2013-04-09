@@ -1,5 +1,13 @@
 <?php
 
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : users.php
+Author : Bobby Hazel
+Description : RESTful users controller 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
 class Users_Controller extends Base_Controller {
 	
 	public $restful = true;
@@ -29,13 +37,11 @@ class Users_Controller extends Base_Controller {
 		else
 		{
 			return Redirect::to_route('register')->with_errors($validation)->with_input();
-		}
-		
+		}	
 	}
 
 	public function get_login()
 	{
-
 		return View::make('users.login');
 	}
 

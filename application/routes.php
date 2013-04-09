@@ -1,10 +1,22 @@
 <?php
 
-// Home Resource	
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : routes.php
+Author : Bobby Hazel
+Description : routes for TextConnect
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
+/*
+* Home Resource	
+*/
 Route::get('/', array('before' => 'auth', 'as' => 'home', 'uses' => 'home@index'));
 
 
-// User Resource
+/*
+* User Resource
+*/
 Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
 //Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
 Route::get('register', array('as' => 'register', 'uses' => 'users@new'));
@@ -17,7 +29,9 @@ Route::post('login', array('uses' => 'users@login'));
 //Route::delete('users/(:any)', 'users@destroy');
 
 
-// Book Resource
+/*
+* Book Resource
+*/
 Route::get('books', array('as' => 'books', 'uses' => 'books@index'));
 Route::get('books/(:num)', array('as' => 'book', 'uses' => 'books@show'));
 Route::get('books/library', array('as'=> 'library' , 'uses' => 'books@library'));
@@ -27,7 +41,9 @@ Route::post('books', array('before' => 'csrf', 'uses' => 'books@create'));
 Route::put('books/(:any)', array('before' => 'csrf', 'uses' => 'books@update'));
 Route::delete('books/library', array('as' => 'destroy_book', 'uses' => 'books@destroy'));
 
-// Class Resource
+/* 
+* Class Resource
+*/
 Route::get('classes', array('as' => 'classes', 'uses' => 'classes@index'));
 Route::get('classes/(:any)', array('as' => 'class', 'uses' => 'classes@show'));
 Route::get('classes/new', array('as' => 'new_class', 'uses' => 'classes@new'));
@@ -37,7 +53,9 @@ Route::post('classes', 'classes@create');
 Route::put('classes/(:any)', 'classes@update');
 Route::delete('classes/(:any)', 'classes@destroy');
 
-//File Uploader
+/* 
+* File Uploader
+*/
 Route::any('upload', function()
 {
 	$upload_handler = IoC::resolve('uploadhandler');
@@ -72,17 +90,6 @@ Route::any('upload', function()
 	        header('HTTP/1.1 405 Method Not Allowed');
 	}
 });
-
-/*
-Route::get('register', array('as' => 'register', 'uses' => 'users@new'));
-Route::get('login', array('as'=> 'login', 'uses' => 'users@login'));
-Route::get('logout', array('as' => 'logout', 'uses' => 'users@logout'));
-*/
-
-/*
-Route::post('register', array('before' => 'csrf', 'uses' => 'users@create'));
-Route::post('login', array('uses' => 'users@login'));
-*/
 
 /*
 |--------------------------------------------------------------------------

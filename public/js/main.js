@@ -1,5 +1,14 @@
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : main.js
+Author : Bobby Hazel
+Description : main js file for TextConnect
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
 $(function(){
 
+	// Detects changes for Open-Textbooks API
 	$('.open_textbooks').on('change', function(){
 		var data = {
 			'section' : '499',
@@ -11,18 +20,22 @@ $(function(){
 			data: data,
 			dataType: 'json',
 			success: function(data){
-				loadForm(data);
+				loadMultiSelect(data);
 			}
 		});
 	});
 
-function loadForm(data){
-	var items = [];
-	$.each(data.data, function(i, data){
-		 items.push('<option value="' + data.name + '">' + data.name + '</option>');
-	});
-	$('#name').html(items.join(''));	
-}
+	/*
+	* Function: loadMultiSelect(data);
+	* Accpets JSON to be parsed and placed into multiselect
+	*/
+	function loadMultiSelect(data){
+		var items = [];
+		$.each(data.data, function(i, data){
+			 items.push('<option value="' + data.name + '">' + data.name + '</option>');
+		});
+		$('#name').html(items.join(''));	
+	}
 
 });
 

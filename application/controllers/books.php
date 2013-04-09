@@ -1,12 +1,23 @@
 <?php
 
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : books.php
+Author : Bobby Hazel
+Description : RESTful Books controller 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
+
 class Books_Controller extends Base_Controller {
 
 	public $restful = true;
 
 	public function __construct()
 	{
-		$this->filter('before','auth')->only(array('create', 'library', 'edit', 'update'));
+		$this->filter('before','auth')->only(
+			array('create', 'library', 'edit', 'update', 'show', 'new', 'index')
+		);
 	}
 
 	public function get_index()
@@ -17,7 +28,41 @@ class Books_Controller extends Base_Controller {
 
 	public function get_new()
 	{
-		return View::make('books.new');
+		$isbn = Input::get('isbn');
+
+		if($isbn != ''){
+
+			//Create url
+			$url='http://isbndb.com/api/books.xml?access_key=XRTO3TED&results=details&index1=isbn&value1='.$isbn;
+
+			//Load url into $response
+			$response = simplexml_load_file($url);
+
+			//Check if we got at least one result
+			if($response->BookList['total_results']==1)
+			{
+				$book = $response->BookList->BookData;
+
+				return View::make('books.new')
+					->with('isbn', $book['isbn13'])
+					->with('title', $book->Title)
+					->with('author', $book->AuthorsText)
+					->with('publisher', $book->PublisherText)
+					->with('edition', $book->Details['edition_info'])
+					->with('language', $book->Details['language'])
+					->with('description', $book->Details['physical_description_text']);
+			}
+			else
+			{
+			return View::make('books.new')
+				->with('message', '<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert">x</button>No Book was found with ISBN</div>');
+			}	
+		}
+		else
+		{
+			return View::make('books.new');
+		}
+		
 	}
 
 	public function post_create()
@@ -42,7 +87,8 @@ class Books_Controller extends Base_Controller {
 		}
 		else
 		{
-			return Redirect::to_route('new_book')->with_errors($validation)->with_input();
+			return Redirect::to_route('new_book')
+				->with_errors($validation)->with_input();
 		}
 
 	}
@@ -65,7 +111,8 @@ class Books_Controller extends Base_Controller {
 	{
 		if (!$this->book_belongs_to_user($id))
 		{
-			return Redirect::to_route('library')->with('message', '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>Invalid Book</div>');
+			return Redirect::to_route('library')
+				->with('message', '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>Invalid Book</div>');
 		}
 
 		return View::make('books.edit')

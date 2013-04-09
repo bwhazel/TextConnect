@@ -1,5 +1,13 @@
 <?php
 
+/* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Title : classes.php
+Author : Bobby Hazel
+Description : RESTful classes controller 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+*/
+
 class Classes_Controller extends Base_Controller {
 
 	public $restful = true; 

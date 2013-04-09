@@ -6,12 +6,22 @@
           </blockquote>
           {{ Form::horizontal_open('books', 'POST') }}
           {{ Form::token() }}
+            <div class="control-group {{ $errors->has('isbn') ? 'error' : '' }}">
+              <label class="control-label" for="isbn">ISBN Number: </label>
+              <div class="controls">
+                <div class="input-prepend">
+                  <span class="add-on">#</span>
+                  {{ Form::xlarge_text('isbn', isset($isbn)? $isbn : Input::old('isbn') , array('class' => 'input-xlarge', 'id' => 'isbn','placeholder' => 'ISBN Number'))}}
+                </div>
+                {{ $errors->has('isbn') ? Form::inline_help($errors->first('isbn','<li>:message</li>')) : '' }}
+              </div>
+            </div>
             <div class="control-group {{ $errors->has('title') ? 'error' : '' }}">
               <label class="control-label" for="title">Title: </label>
               <div class="controls">
                 <div class="input-prepend">
                   <span class="add-on"><i class="icon-book"></i></span>
-                  {{ Form::xlarge_text('title', Input::old('title') , array('placeholder' => 'Title'))}}
+                  {{ Form::xlarge_text('title', isset($title)? $title : Input::old('title') , array('placeholder' => 'Title'))}}
                 </div>
                 {{ $errors->has('title') ? Form::inline_help($errors->first('title','<li>:message</li>')) : '' }}
               </div>
@@ -21,19 +31,9 @@
               <div class="controls">
                 <div class="input-prepend">
                   <span class="add-on"><i class="icon-user"></i></span>
-                  {{ Form::xlarge_text('author', Input::old('author') , array('placeholder' => 'Author'))}}
+                  {{ Form::xlarge_text('author', isset($author)? $author : Input::old('author') , array('placeholder' => 'Author'))}}
                 </div>
                 {{ $errors->has('title') ? Form::inline_help($errors->first('author','<li>:message</li>')) : '' }}
-              </div>
-            </div>
-            <div class="control-group {{ $errors->has('isbn') ? 'error' : '' }}">
-              <label class="control-label" for="isbn">ISBN Number: </label>
-              <div class="controls">
-                <div class="input-prepend">
-                  <span class="add-on">#</span>
-                  {{ Form::xlarge_text('isbn', Input::old('isbn'), array('class' => 'input-xlarge', 'placeholder' => 'ISBN Number'))}}
-                </div>
-                {{ $errors->has('isbn') ? Form::inline_help($errors->first('isbn','<li>:message</li>')) : '' }}
               </div>
             </div>
             <div class="control-group {{ $errors->has('edition') ? 'error' : '' }}">
