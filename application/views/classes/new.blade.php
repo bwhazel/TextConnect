@@ -1,4 +1,4 @@
-@layout('layouts.master')
+@layout('layouts.classes')
 
 @section('content')    
           <blockquote>
@@ -6,45 +6,43 @@
           </blockquote>
           {{ Form::horizontal_open('classes', 'POST', array('class' => 'open_textbooks')) }}
           {{ Form::token() }}
-            <div class="control-group {{ $errors->has('Term') ? 'error' : '' }}">
+            <div id="school-select2" class="control-group {{ $errors->has('school') ? 'error' : '' }}">
+              <label class="control-label" for="school">School: </label>
+              <div class="controls">
+                <input class="select2" type="hidden" name="school" id="school" style="width: 300px;"/> 
+                <span id="school-loading" class="loading help-inline"></span>  
+                {{ $errors->has('term') ? Form::inline_help($errors->first('school', '<li>:message</li>')) : '' }}
+              </div>
+            </div>
+            <div id="term-select2" class="select2-hidden control-group {{ $errors->has('term') ? 'error' : '' }}">
               <label class="control-label" for="term">Term: </label>
               <div class="controls">
-               <select name="term">
-                <option value="Spring 2013">Spring 2013</option>
-                <option value="Fall 2013">Fall 2013</option>
-                <option value="Spring 2014">Spring 2014</option>
-              </select>    
-              {{ $errors->has('term') ? Form::inline_help($errors->first('term', '<li>:message</li>')) : '' }}
+                <input class="select2" type="hidden" name="term" id="term" style="width: 300px;"/> 
+                <span id="term-loading" class="loading help-inline"></span>   
+                {{ $errors->has('term') ? Form::inline_help($errors->first('term','<li>:message</li>')) : '' }}
               </div>
             </div>
-                  <select id="name" multiple="multiple" size="10"  style="width: 380px;"></select> 
-            <div class="control-group {{ $errors->has('department') ? 'error' : '' }}">
-              <label class="control-label" for="department">Department: </label>
+            <div id="department-select2" class="select2-hidden control-group {{ $errors->has('dept') ? 'error' : '' }}">
+              <label class="control-label" for="dept">Department: </label>
               <div class="controls">
-                <div class="input-prepend">
-                  <span class="add-on"><i class="icon-book"></i></span>
-                  {{ Form::xlarge_text('department', Input::old('department') , array('placeholder' => 'Department'))}}
-                </div>
-                {{ $errors->has('department') ? Form::inline_help($errors->first('department','<li>:message</li>')) : '' }}
+                <input class="select2" type="hidden" name="dept" id="dept" style="width: 300px;"/> 
+                <span id="dept-loading" class="loading help-inline"></span>   
+                {{ $errors->has('dept') ? Form::inline_help($errors->first('dept','<li>:message</li>')) : '' }}
               </div>
             </div>
-            <div class="control-group {{ $errors->has('course') ? 'error' : '' }}">
+            <div id="course-select2" class="select2-hidden control-group {{ $errors->has('course') ? 'error' : '' }}">
               <label class="control-label" for="course">Course: </label>
               <div class="controls">
-                <div class="input-prepend">
-                  <span class="add-on"><i class="icon-user"></i></span>
-                  {{ Form::xlarge_text('course', Input::old('course') , array('placeholder' => 'Course'))}}
-                </div>
+                <input class="select2" type="hidden" name="course" id="course" style="width: 300px;"/>
+                <span id="course-loading" class="loading help-inline"></span>    
                 {{ $errors->has('course') ? Form::inline_help($errors->first('course','<li>:message</li>')) : '' }}
               </div>
             </div>
-            <div class="control-group {{ $errors->has('section') ? 'error' : '' }}">
-              <label class="control-label" for="Section">Section: </label>
+            <div id="section-select2" class="select2-hidden control-group {{ $errors->has('section') ? 'error' : '' }}">
+              <label class="control-label" for="section">Section: </label>
               <div class="controls">
-                <div class="input-prepend">
-                  <span class="add-on">#</span>
-                  {{ Form::xlarge_text('section', Input::old('section'), array('class' => 'input-xlarge', 'placeholder' => 'Section'))}}
-                </div>
+                <input class="select2" type="hidden" name="section" id="section" style="width: 300px;"/>
+                <span id="section-loading" class="loading help-inline"></span>    
                 {{ $errors->has('section') ? Form::inline_help($errors->first('section','<li>:message</li>')) : '' }}
               </div>
             </div>

@@ -112,7 +112,7 @@ class Books_Controller extends Base_Controller {
 		if (!$this->book_belongs_to_user($id))
 		{
 			return Redirect::to_route('library')
-				->with('message', '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>Invalid Book</div>');
+				->with('message', '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>You do not have permission to edit this book</div>');
 		}
 
 		return View::make('books.edit')
@@ -126,7 +126,7 @@ class Books_Controller extends Base_Controller {
 		if(!$this->book_belongs_to_user($id))
 		{
 			return Redirect::to_route('your_books')
-				->with('message', '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>Invalid Book</div>');
+				->with('message', '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>You do not have permission to edit this book.</div>');
 		}
 
 		$validation = Book::validate(Input::all());

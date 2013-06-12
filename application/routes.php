@@ -28,7 +28,6 @@ Route::post('login', array('uses' => 'users@login'));
 //Route::put('users/(:any)', 'users@update');
 //Route::delete('users/(:any)', 'users@destroy');
 
-
 /*
 * Book Resource
 */
@@ -52,6 +51,17 @@ Route::get('classes/(:any)/edit', array('as' => 'edit_class', 'uses' => 'classes
 Route::post('classes', 'classes@create');
 Route::put('classes/(:any)', 'classes@update');
 Route::delete('classes/(:any)', 'classes@destroy');
+
+/*
+* Message Resource
+*/
+Route::get('messages', array('as' => 'messages', 'uses' => 'messages@index'));
+Route::get('messages/(:any)', array('as' => 'message', 'uses' => 'messages@show'));
+Route::get('messages/new', array('as' => 'new_message', 'uses' => 'messages@new'));
+Route::get('messages/(:any)/edit', array('as' => 'edit_message', 'uses' => 'messages@edit'));
+Route::post('messages', 'messages@create');
+Route::put('messages/(:any)', 'messages@update');
+Route::delete('messages/(:any)', 'messages@destroy');
 
 /* 
 * File Uploader
